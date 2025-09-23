@@ -1,5 +1,7 @@
 # Support de cours pour PAI
 
+[Site officiel](https://sites.google.com/view/supop-pai)
+
 Ce repository contient les supports pour le cours PAI 2025/2026
 
 Il sera continuellement mis à jour au cours de l'année.
