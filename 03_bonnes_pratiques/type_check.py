@@ -34,6 +34,11 @@ class Point(Generic[T]):
     def __abs__(self) -> T:
         return max(abs(self.x), abs(self.y))
 
+    def __truediv__(self, quotient: float) -> "Point[float]":
+        if quotient == 0:
+            raise ZeroDivisionError("cannot divide by zero")
+        return Point(self.x / quotient, self.y / quotient)
+
     def norm(self) -> float:
         return math.sqrt(self.x**2 + self.y**2)
 
@@ -50,8 +55,17 @@ class Point(Generic[T]):
             return Point(self.x / norm, self.y / norm)
 
 
-def point_form_sequence(input_list: list[T]) -> "Point[T]":
-    return Point(input_list[0], input_list[1])
+def point_form_sequence(input_sequence: list[T]) -> "Point[T]":
+    """Construct a point from a sequence of 2 values.
+
+    Args:
+        input_sequence: sequence that will be used for construction.
+            must be at least 2 elements long.
+
+    Returns:
+        Created point.
+    """
+    return Point(input_sequence[0], input_sequence[1])
 
 
 if __name__ == "__main__":

@@ -33,24 +33,6 @@ repos:
     args:
     - --preview
     - --enable-unstable-feature=string_processing
-- repo: https://github.com/pycqa/pydocstyle
-  rev: 6.3.0
-  hooks:
-  - id: pydocstyle
-    args:
-    - --convention=google
-    - --add-ignore=D415,D205,D1
-    additional_dependencies:
-    - tomli
-- repo: https://github.com/jsh9/pydoclint
-  rev: 0.6.7
-  hooks:
-  - id: pydoclint
-    args:
-    - -aid=True
-    - --style=google
-    - -athd=False
-    - -crt=False
 - repo: https://github.com/igorshubovych/markdownlint-cli
   rev: v0.45.0
   hooks:
@@ -59,10 +41,19 @@ repos:
     - --disable=MD013
     - --disable=MD024
     exclude: ^docs/.*
-- repo: https://github.com/keewis/blackdoc
-  rev: v0.4.0
-  hooks:
-  - id: blackdoc
-    additional_dependencies:
-    - black==25.1.0
-  - id: blackdoc-autoupdate-black
+# - repo: https://github.com/pycqa/pydocstyle
+#   rev: 6.3.0
+#   hooks:
+#   - id: pydocstyle
+#     args:
+#     - --convention=google
+#     - --add-ignore=D415,D205,D1
+# - repo: https://github.com/jsh9/pydoclint
+#   rev: 0.6.7
+#   hooks:
+#   - id: pydoclint
+#     args:
+#     - -aid=True
+#     - --style=google
+#     - -athd=False
+#     - -crt=False
