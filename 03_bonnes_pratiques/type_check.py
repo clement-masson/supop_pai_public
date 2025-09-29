@@ -1,5 +1,6 @@
 import math
-from typing import overload, Literal, Generic, TypeVar
+from typing import Generic, Literal, TypeVar, overload, cast
+# from collections.abc import Sequence
 
 T = TypeVar("T", bound=int | float)
 
@@ -21,7 +22,7 @@ class Point(Generic[T]):
         return f"({self.x}, {self.y})"
 
     def __add__(self, other: "Point | float") -> "Point[T]":
-        if isinstance(other, "Point"):
+        if isinstance(other, Point):
             return Point(self.x + other.x, self.y + other.y)
         else:
             return Point(self.x + other, self.y + other)
@@ -32,7 +33,8 @@ class Point(Generic[T]):
         return self.x == value.x and self.y == value.y
 
     def __abs__(self) -> T:
-        return max(abs(self.x), abs(self.y))
+        result = max(abs(self.x), abs(self.y))
+        return cast(T, result)
 
     def __truediv__(self, quotient: float) -> "Point[float]":
         if quotient == 0:
@@ -43,24 +45,28 @@ class Point(Generic[T]):
         return math.sqrt(self.x**2 + self.y**2)
 
     @overload
-    def normalize(self, inplace: Literal[True]) -> None: ...
+    def invert(self, inplace: Literal[True]) -> None: ...
     @overload
-    def normalize(self, inplace: Literal[False]) -> "Point[float]": ...
-    def normalize(self, inplace: bool = False) -> "Point[float] | None":
-        norm = self.norm()
+    def invert(self, inplace: Literal[False]) -> "Point[T]": ...
+    def invert(self, inplace: bool = False) -> "Point[T] | None":
         if inplace:
-            self.x /= norm
-            self.y /= norm
+            self.x, self.y = self.y, self.x
         else:
-            return Point(self.x / norm, self.y / norm)
+            return Point(self.y, self.x)
 
 
-def point_form_sequence(input_sequence: list[T]) -> "Point[T]":
+def point_from_sequence(input_sequence: list[T]) -> "Point[T]":
     """Construct a point from a sequence of 2 values.
 
     Args:
         input_sequence: sequence that will be used for construction.
             must be at least 2 elements long.
+
+    Example:
+        >>> for a,b in ((0,1), (1,0)):
+        ...     print(point_from_sequence((a,b)))
+        (0, 1)
+        (1, 0)
 
     Returns:
         Created point.
@@ -77,5 +83,5 @@ if __name__ == "__main__":
     other_value: int = abs(my_other_point)
     print(f"First point : {my_point}")
     print(f"Norm of this point : {other_value}")
-    my_last_point = point_form_sequence(input_list=(0, 1))
+    my_last_point = point_from_sequence(input_sequence=(0, 1))
     print(f"Thrid point: {my_last_point}")
