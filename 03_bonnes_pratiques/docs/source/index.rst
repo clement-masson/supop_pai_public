@@ -11,14 +11,14 @@ Add your content using ``reStructuredText`` syntax. See the
 documentation for details.
 
 
-The Dataset object
-~~~~~~~~~~~~~~~~~~
+The Type check Module
+~~~~~~~~~~~~~~~~~~~~~
 
 .. autosummary::
     :nosignatures:
+    :recursive:
     :toctree: generated
     :caption: Type check functions
-    :recursive:
 
     type_check.Point
     type_check.point_from_sequence
