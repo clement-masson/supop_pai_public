@@ -9,7 +9,9 @@ def update_figure(plot: ui.plotly, phase=0):
     df_sin = pd.DataFrame({"x": X, "y": np.sin(X), "function": "sin"})
     df_cos = pd.DataFrame({"x": X, "y": np.cos(X), "function": "cos"})
     df = pd.concat([df_sin, df_cos])
-    plot.update_figure(px.line(df, x="x", y="y", color="function"))
+    fig = px.line(df, x="x", y="y", color="function")
+    plot.figure.update(data=fig.data)
+    plot.update()
 
 
 def app():
