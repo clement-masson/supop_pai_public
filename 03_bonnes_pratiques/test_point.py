@@ -4,6 +4,7 @@ from type_check import Point
 
 
 def test_point():
+    Point(0, 0)
     assert True
 
 

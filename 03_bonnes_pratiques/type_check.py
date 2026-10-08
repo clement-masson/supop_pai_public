@@ -1,8 +1,9 @@
 import math
-from typing import Generic, Literal, TypeVar, overload, cast
+from typing import Generic, Literal, TypeVar, cast, overload
+
 # from collections.abc import Sequence
 
-T = TypeVar("T", bound=int | float)
+T = TypeVar("T", int, float)
 
 
 def bad_type(x: float) -> str:
