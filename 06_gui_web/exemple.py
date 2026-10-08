@@ -1,6 +1,6 @@
-from nicegui import ui
-import pandas as pd
 import numpy as np
+import pandas as pd
+from nicegui import ui
 
 with ui.card(align_items="center"):
     with ui.row().classes("items-center"):
@@ -13,9 +13,7 @@ with ui.card(align_items="center"):
     with ui.grid(columns=2):
         with ui.column():
             ui.label("Box 1")
-            ui.radio(["Radio button 1"])
-            ui.radio(["Radio button 2"])
-            ui.radio(["Radio button 3"])
+            ui.radio(["Radio button 1", "Radio button 2", "Radio button 3"])
             ui.checkbox("Tri-state check box")
         with ui.column():
             ui.label("Box 2")
@@ -39,11 +37,13 @@ with ui.card(align_items="center"):
                 ui.checkbox("Group 3")
                 ui.input("password", password=True)
                 ui.slider(min=0, max=50, value=0)
-                with ui.input("Date") as date:
-                    with ui.menu().props("no-parent-event") as menu:
-                        with ui.date().bind_value(date):
-                            with ui.row().classes("justify-end"):
-                                ui.button("Close", on_click=menu.close).props("flat")
+                with (
+                    ui.input("Date") as date,
+                    ui.menu().props("no-parent-event") as menu,
+                    ui.date().bind_value(date),
+                    ui.row().classes("justify-end"),
+                ):
+                    ui.button("Close", on_click=menu.close).props("flat")
                     with date.add_slot("append"):
                         ui.icon("edit_calendar").on("click", menu.open).classes(
                             "cursor-pointer"
@@ -52,4 +52,4 @@ with ui.card(align_items="center"):
     ui.linear_progress(0.5)
 
 
-ui.run(title="Styles")
+ui.run(title="Example")
